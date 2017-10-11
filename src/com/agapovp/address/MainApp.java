@@ -1,6 +1,10 @@
 package com.agapovp.address;
 
+import com.agapovp.address.model.Person;
 import javafx.application.Application;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,14 +18,31 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private ObservableList<Person> personData = FXCollections.observableArrayList();
+
+    public MainApp() {
+        personData.add(new Person("Name1", "LastName1"));
+        personData.add(new Person("Name2", "LastName2"));
+        personData.add(new Person("Name3", "LastName3"));
+        personData.add(new Person("Name4", "LastName4"));
+        personData.add(new Person("Name5", "LastName5"));
+        personData.add(new Person("Name6", "LastName6"));
+        personData.add(new Person("Name7", "LastName7"));
+        personData.add(new Person("Name8", "LastName8"));
+        personData.add(new Person("Name9", "LastName9"));
+    }
+
+    public ObservableList<Person> getPersonData() {
+        return personData;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
 
         initRootLayout();
-
         showPersonOverview();
     }
 
@@ -46,6 +67,9 @@ public class MainApp extends Application {
             AnchorPane personOverview = (AnchorPane) loader.load();
 
             rootLayout.setCenter(personOverview);
+
+            PersonOverviewController controller = loader.getController();
+            controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
