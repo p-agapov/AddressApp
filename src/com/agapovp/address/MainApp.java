@@ -8,11 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class MainApp extends Application {
@@ -42,7 +44,11 @@ public class MainApp extends Application {
 
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
+        this.primaryStage.getIcons().add(new Image("file:resources/images/address_book_32.png"));
+        this.primaryStage.getIcons().add(new Image("file:resources/images/address_book_128.png"));
 
+        com.apple.eawt.Application application = com.apple.eawt.Application.getApplication();
+        application.setDockIconImage(Toolkit.getDefaultToolkit().getImage("resources/images/address_book_128.png"));
 
         initRootLayout();
         showPersonOverview();
