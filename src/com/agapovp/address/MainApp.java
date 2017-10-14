@@ -2,6 +2,7 @@ package com.agapovp.address;
 
 import com.agapovp.address.model.Person;
 import com.agapovp.address.model.PersonListWrapper;
+import com.agapovp.address.view.BirthdayStatisticsController;
 import com.agapovp.address.view.PersonEditDialogController;
 import com.agapovp.address.view.PersonOverviewController;
 import com.agapovp.address.view.RootLayoutController;
@@ -41,6 +42,12 @@ public class MainApp extends Application {
         personData.add(new Person("Name7", "LastName7"));
         personData.add(new Person("Name8", "LastName8"));
         personData.add(new Person("Name9", "LastName9"));
+        personData.add(new Person("Name10", "LastName10"));
+        personData.add(new Person("Name11", "LastName11"));
+        personData.add(new Person("Name12", "LastName12"));
+        personData.add(new Person("Name13", "LastName13"));
+        personData.add(new Person("Name14", "LastName14"));
+        personData.add(new Person("Name15", "LastName15"));
     }
 
     public ObservableList<Person> getPersonData() {
@@ -127,6 +134,27 @@ public class MainApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public void showBirthdayStatistics() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/BirthdayStatistics.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Birthday Statistics");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            BirthdayStatisticsController controller = loader.getController();
+            controller.setPersonData(personData);
+
+            dialogStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
